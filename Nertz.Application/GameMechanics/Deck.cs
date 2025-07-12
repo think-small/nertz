@@ -7,6 +7,7 @@ public static class Deck
 {
     public const int DECK_SIZE = 52;
     public const int CARDS_PER_SUIT = 13;
+    public const int SUITS_PER_DECK = 4;
 
     public static Card[] CreateFullDeck(IShuffle shuffler)
     {

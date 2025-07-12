@@ -4,7 +4,7 @@ namespace Nertz.Application.Players;
 
 public class Player
 {
-    private Guid Id { get; init; } = Guid.NewGuid();
+    public Guid Id { get; init; } = Guid.NewGuid();
     public required PlayerHand Hand { get; set; }
 
     public Player() { }

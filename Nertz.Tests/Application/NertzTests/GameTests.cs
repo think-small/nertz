@@ -21,7 +21,7 @@ public class GameTests
     {
         _mockSetupOptions = new GameSetupOptions()
         {
-            MaxPlayerCount = 10,
+            MaxPlayerCount = 3,
             MinPlayerCount = 2,
             MaxTargetScore = 100,
             MinTargetScore = 1,
@@ -41,13 +41,8 @@ public class GameTests
     [Fact]
     public void Should_Create_Game()
     {
-        var mockPlayers = new[]
-        {
-            new Player { Hand = _mockPlayerHand },
-            new Player { Hand = _mockPlayerHand }
-        };
-        
-        var actual = Game.CreateGame(1, 2, mockPlayers, _mockSetupOptions, _mockCardStackFactory, _mockShuffle);
+        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid() };
+        var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(false);
         actual.Value.ShouldBeOfType<Game>();
@@ -56,12 +51,8 @@ public class GameTests
     [Fact]
     public void Should_Error_If_Fewer_Than_2_Players()
     {
-        var mockPlayers = new[]
-        {
-            new Player { Hand = _mockPlayerHand }
-        };
-        
-        var actual = Game.CreateGame(1, 2, mockPlayers, _mockSetupOptions, _mockCardStackFactory, _mockShuffle);
+        var mockPlayerIds = new[] { Guid.NewGuid() };
+        var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
         actual.Errors.Count.ShouldBe(1);
@@ -71,14 +62,8 @@ public class GameTests
     [Fact]
     public void Should_Error_If_Player_Count_Exceeds_Max_Player_Setting()
     {
-        var mockPlayers = new[]
-        {
-            new Player { Hand = _mockPlayerHand },
-            new Player { Hand = _mockPlayerHand },
-            new Player { Hand = _mockPlayerHand },
-        };
-        
-        var actual = Game.CreateGame(1, 2, mockPlayers, _mockSetupOptions, _mockCardStackFactory, _mockShuffle);
+        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
+        var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
         actual.Errors.Count.ShouldBe(1);
@@ -90,13 +75,8 @@ public class GameTests
     [InlineData(101)]
     public void Should_Error_If_Target_Score_Is_Invalid(int targetScore)
     {
-        var mockPlayers = new[]
-        {
-            new Player { Hand = _mockPlayerHand },
-            new Player { Hand = _mockPlayerHand },
-        };
-
-        var actual = Game.CreateGame(targetScore, 2, mockPlayers, _mockSetupOptions, _mockCardStackFactory, _mockShuffle);
+        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
+        var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, targetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
         actual.Errors.Count.ShouldBe(1);

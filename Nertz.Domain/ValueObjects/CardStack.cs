@@ -47,15 +47,15 @@ namespace Nertz.Domain.ValueObjects;
         return true;
     }
 
-    public bool TryRemoveAt(short index, short count, out CardStack? cardStack)
+    public bool TryRemoveAt(short index, short count, out CardStack? removedCardStack)
     {
-        cardStack = null;
+        removedCardStack = null;
         
         if (!_removeStrategy.TryRemoveAt(_cards, index, count, out var cardTransaction) || cardTransaction is null) return false;
         
         _cards = cardTransaction.UpdatedCardState;
         _lastFilledIndex = _cards.Length - 1;
-        cardStack = this with
+        removedCardStack = this with
         {
             _cards = cardTransaction.RemovedCards,
             _lastFilledIndex = cardTransaction.RemovedCards.Length - 1

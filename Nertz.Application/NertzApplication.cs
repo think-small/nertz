@@ -24,20 +24,8 @@ public class NertzApplication : INertz
         _shuffler = shuffler;
     }
     
-    public ErrorOr<Game> SetupGame()
+    public ErrorOr<Game> SetupGame(int targetScore, int maxPlayerCount, IEnumerable<Guid> playerIds)
     {
-        var players = Enumerable.Range(0, 2)
-            .Select(_ => new Player
-            {
-                Hand = new PlayerHand
-                {
-                    Fan = _cardStackFactory.Create(CardStackType.NullCardStack),
-                    DrawPile = _cardStackFactory.Create(CardStackType.NullCardStack),
-                    WorkPiles = Enumerable.Range(0, 3).Select(_ => _cardStackFactory.Create(CardStackType.NullCardStack)).ToArray()
-                }
-            })
-            .ToArray();
-        
-        return Game.CreateGame(1, 2, players, _setupOptions, _cardStackFactory, _shuffler);
+        return Game.CreateGame(_setupOptions, _cardStackFactory, _shuffler, targetScore, maxPlayerCount, playerIds.ToArray());
     }
 }
