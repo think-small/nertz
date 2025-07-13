@@ -112,7 +112,7 @@ public sealed class Game
     {
         var newRoundNumber = _currentRoundNumber + 1;
         var initialPlayerScores = CreateInitialPlayerScores(_players);
-        var newRoundResult = GameRound.Create(_cardStackFactory, _id, newRoundNumber, initialPlayerScores);
+        var newRoundResult = GameRound.Create(_cardStackFactory, _id, newRoundNumber, _targetScore, initialPlayerScores);
 
         if (newRoundResult.IsError)
         {
