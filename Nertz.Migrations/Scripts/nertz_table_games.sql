@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS nertz.games(
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NULL DEFAULT NOW(),
+    ended_at TIMESTAMP NULL DEFAULT NOW()
+);

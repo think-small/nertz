@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Application", "Nertz.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Tests", "Nertz.Tests\Nertz.Tests.csproj", "{F5926787-8688-452A-94E3-71F7A584FED1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Infrastructure", "Nertz.Infrastructure\Nertz.Infrastructure.csproj", "{CFB86B69-B6AF-42CA-89C1-1BD8EBBB39DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Migrations", "Nertz.Migrations\Nertz.Migrations.csproj", "{411BBB49-9EB6-44F5-82BF-3F7B523A846A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{F5926787-8688-452A-94E3-71F7A584FED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5926787-8688-452A-94E3-71F7A584FED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5926787-8688-452A-94E3-71F7A584FED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB86B69-B6AF-42CA-89C1-1BD8EBBB39DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB86B69-B6AF-42CA-89C1-1BD8EBBB39DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB86B69-B6AF-42CA-89C1-1BD8EBBB39DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB86B69-B6AF-42CA-89C1-1BD8EBBB39DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{411BBB49-9EB6-44F5-82BF-3F7B523A846A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411BBB49-9EB6-44F5-82BF-3F7B523A846A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411BBB49-9EB6-44F5-82BF-3F7B523A846A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411BBB49-9EB6-44F5-82BF-3F7B523A846A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

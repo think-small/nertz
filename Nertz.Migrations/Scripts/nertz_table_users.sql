@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS nertz.users(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NULL DEFAULT NOW()
+);
