@@ -3,6 +3,7 @@ using Nertz.Application.Nertz;
 using Nertz.UI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
