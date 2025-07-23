@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS nertz.common_piles(
     id serial PRIMARY KEY,
+    game_id INT,
     round_id INT,
     suit card_suits,
     current_rank card_ranks,
