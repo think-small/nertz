@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using Nertz.Application.Nertz;
 using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 using Nertz.Domain.Strategies;
 
 namespace Nertz.Application.Factories;

@@ -1,4 +1,4 @@
-namespace Nertz.Domain.ValueObjects;
+namespace Nertz.Domain.Cards;
 
 public enum Suit
 {

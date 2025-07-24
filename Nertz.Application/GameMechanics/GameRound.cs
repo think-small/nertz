@@ -2,7 +2,7 @@ using ErrorOr;
 using Nertz.Application.Factories;
 using Nertz.Application.Nertz.Shared.Interfaces;
 using Nertz.Application.Shared.Errors;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Nertz;
 

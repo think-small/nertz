@@ -1,6 +1,4 @@
-using Nertz.Application.Nertz;
-
-namespace Nertz.Application.Players;
+namespace Nertz.Domain.Players;
 
 public class Player
 {

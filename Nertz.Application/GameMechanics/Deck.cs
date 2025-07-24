@@ -1,5 +1,5 @@
 using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Nertz;
 

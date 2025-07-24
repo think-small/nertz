@@ -1,5 +1,5 @@
 using Nertz.Domain.Contracts;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 
 namespace Nertz.Domain.Strategies;
 

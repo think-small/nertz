@@ -5,7 +5,7 @@ using Nertz.Application.Factories;
 using Nertz.Application.Nertz;
 using Nertz.Application.Nertz.Shared.Interfaces;
 using Nertz.Application.Nertz.Shared.Utility;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Extensions;
 

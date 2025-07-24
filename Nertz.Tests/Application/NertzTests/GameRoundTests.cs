@@ -2,7 +2,7 @@ using Nertz.Application.Factories;
 using Nertz.Application.Nertz;
 using Nertz.Application.Nertz.Shared.Interfaces;
 using Nertz.Application.Shared.Errors;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 using NSubstitute;
 using Shouldly;
 

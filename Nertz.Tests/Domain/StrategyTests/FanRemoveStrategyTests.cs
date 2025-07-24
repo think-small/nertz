@@ -1,5 +1,5 @@
 using Nertz.Domain.Strategies;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 using Shouldly;
 
 namespace Nertz.Tests.Domain.Strategies;

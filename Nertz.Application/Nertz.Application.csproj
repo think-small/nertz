@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Nertz.Domain\Nertz.Domain.csproj" />
+      <ProjectReference Include="..\Nertz.Infrastructure\Nertz.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

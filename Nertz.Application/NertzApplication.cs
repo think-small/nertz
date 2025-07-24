@@ -3,8 +3,7 @@ using Microsoft.Extensions.Options;
 using Nertz.Application.Contracts;
 using Nertz.Application.Factories;
 using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Application.Players;
-using Nertz.Domain.ValueObjects;
+using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Nertz;
 

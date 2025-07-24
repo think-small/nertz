@@ -1,6 +1,6 @@
 using Nertz.Domain.Contracts;
 
-namespace Nertz.Domain.ValueObjects;
+namespace Nertz.Domain.Cards;
 
  public sealed record CardStack
 {
