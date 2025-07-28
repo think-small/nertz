@@ -27,8 +27,9 @@ public class NertzRepository : INertzRepository
         try
         {
             var gameId = await transaction.Connection.ExecuteAsync(StoredProcs.CreateGame, new { created_at = _timeProvider.GetUtcNow() });
-            await transaction.Connection.ExecuteAsync(StoredProcs.CreateGameRound, new { game_id = gameId, round_number = 0,});
-            
+            var roundId = await transaction.Connection.ExecuteAsync(StoredProcs.CreateGameRound, new { game_id = gameId, round_number = 0,});
+            await transaction.Connection.ExecuteAsync(StoredProcs.AddPlayersToRound, new { round_id = roundId, player_ids = game.PlayerIds });
+
             transaction.Commit();
 
             return gameId;
