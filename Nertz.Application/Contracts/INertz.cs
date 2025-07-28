@@ -5,5 +5,5 @@ namespace Nertz.Application.Contracts;
 
 public interface INertz
 {
-    ErrorOr<Game> SetupGame(int targetScore, int maxPlayerCount, IEnumerable<Guid> playerIds);
+    ErrorOr<Game> SetupGame(int targetScore, int maxPlayerCount, IEnumerable<int> playerIds);
 }

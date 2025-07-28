@@ -1,16 +1,17 @@
 using System.Collections.Frozen;
 using ErrorOr;
-using Nertz.Application.Factories;
-using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Domain.Players;
+using Nertz.Application.Shared.Factories;
+using Nertz.Application.Shared.Interfaces;
+using Nertz.Application.Players;
 using Nertz.Application.Shared.Errors;
 using Nertz.Domain.Cards;
+using Nertz.Infrastructure.DataModels;
 
 namespace Nertz.Application.Nertz;
 
 public sealed class Game
 {
-    private readonly Guid _id;
+    private readonly int? _id;
     private readonly GameSetupOptions _setupOptions;
     private readonly IFactory<CardStack, CardStackType, Card> _cardStackFactory;
     private readonly int _targetScore;
@@ -19,7 +20,7 @@ public sealed class Game
     private readonly IList<GameRound> _rounds;
     private int _currentRoundNumber;
     private readonly GameResult _gameResult;
-    public FrozenDictionary<Guid, int> Scores => _gameResult.PlayerScores.ToFrozenDictionary();
+    public FrozenDictionary<int, int> Scores => _gameResult.PlayerScores.ToFrozenDictionary();
     
     private Game(
         GameSetupOptions setupOptions,
@@ -29,7 +30,7 @@ public sealed class Game
         Player[] players,
         IList<GameRound> rounds,
         GameResult gameResult,
-        Guid? id = null)
+        int? id = null)
     {
         var suitCount = Enum.GetValues(typeof(Suit)).Length;
         _targetScore = targetScore;
@@ -39,7 +40,7 @@ public sealed class Game
         _cardStackFactory = cardStackFactory;
         _rounds = rounds;
         _gameResult = gameResult;
-        _id = id ?? Guid.NewGuid();
+        _id = id;
     }
     
     public static ErrorOr<Game> CreateGame(
@@ -48,7 +49,7 @@ public sealed class Game
         IShuffle shuffler,
         int targetScore,
         int maxPlayerCount,
-        IEnumerable<Guid> playerIds,
+        IEnumerable<int> playerIds,
         IList<GameRound>? rounds = null)
     {
         var setupErrors = new List<Error>();
@@ -83,6 +84,18 @@ public sealed class Game
         return new Game(setupOptions, cardStackFactory, targetScore, maxPlayerCount, players, rounds ?? [], gameResult);
     }
 
+    public GameDataModel ToDataModel()
+    {
+        return new GameDataModel
+        {
+            Id = _id.Value,
+            TargetScore = _targetScore,
+            MaxPlayerCount = _maxPlayerCount,
+            PlayerIds = _players.Select(p => p.Id).ToArray(),
+            GameRounds = _rounds.Select(r => r.ToDataModel()).ToArray(),
+        };
+    }
+
     private static PlayerHand CreateInitialPlayerHand(
         IFactory<CardStack,CardStackType, Card> cardStackFactory,
         IShuffle shuffler,
@@ -103,16 +116,16 @@ public sealed class Game
         };
     }
 
-    private static Dictionary<Guid, int> CreateInitialPlayerScores(Player[] players)
+    private static Dictionary<int, int> CreateInitialPlayerScores(Player[] players)
     {
-        return players.Select(p => new KeyValuePair<Guid, int>(p.Id, 0)).ToDictionary();
+        return players.Select(p => new KeyValuePair<int, int>(p.Id, 0)).ToDictionary();
     }
 
     public ErrorOr<GameRound> StartNewRound()
     {
         var newRoundNumber = _currentRoundNumber + 1;
         var initialPlayerScores = CreateInitialPlayerScores(_players);
-        var newRoundResult = GameRound.Create(_cardStackFactory, _id, newRoundNumber, _targetScore, initialPlayerScores);
+        var newRoundResult = GameRound.Create(_cardStackFactory, newRoundNumber, _targetScore, initialPlayerScores);
 
         if (newRoundResult.IsError)
         {

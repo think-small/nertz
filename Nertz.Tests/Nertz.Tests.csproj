@@ -25,4 +25,8 @@
       <ProjectReference Include="..\Nertz.Domain\Nertz.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Application\" />
+    </ItemGroup>
+
 </Project>

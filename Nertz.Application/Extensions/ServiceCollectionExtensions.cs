@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nertz.Application.Contracts;
-using Nertz.Application.Factories;
+using Nertz.Application.Shared.Factories;
 using Nertz.Application.Nertz;
-using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Application.Nertz.Shared.Utility;
+using Nertz.Application.Shared.Interfaces;
+using Nertz.Application.Shared.Utility;
 using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Extensions;

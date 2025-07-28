@@ -70,7 +70,7 @@ else
 
         var playerIds = Enumerable
             .Range(0, 3)
-            .Select((_) => Guid.NewGuid());
+            .Select((i) => i + 1);
         
         var gameSetupResult = nertzApp.SetupGame(100, 3, playerIds);
 

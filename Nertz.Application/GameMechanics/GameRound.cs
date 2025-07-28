@@ -1,20 +1,22 @@
 using ErrorOr;
-using Nertz.Application.Factories;
-using Nertz.Application.Nertz.Shared.Interfaces;
 using Nertz.Application.Shared.Errors;
+using Nertz.Application.Shared.Factories;
+using Nertz.Application.Shared.Interfaces;
 using Nertz.Domain.Cards;
+using Nertz.Infrastructure.DataModels;
 
 namespace Nertz.Application.Nertz;
 
 public class GameRound
 {
     private readonly int _targetScore;
-    public  Guid Id { get; init; }
-    public Guid GameId { get; init; }
+    public int? Id { get; init; }
+    public int? GameId { get; init; }
     public int RoundNumber { get; init; }
     public CardStack[] CommonPiles { get; init; }
-    public Dictionary<Guid, int> PlayerScores { get; init; }
-    public Guid? RoundWinnerId
+    public Dictionary<int, int> PlayerScores { get; init; }
+
+    public int? RoundWinnerId
     {
         get
         {
@@ -23,7 +25,8 @@ public class GameRound
         }
     }
 
-    private GameRound(Guid id, Guid gameId, int roundNumber, int targetScore, Dictionary<Guid, int> playerScores, CardStack[] commonPiles)
+    private GameRound(int roundNumber, int targetScore, Dictionary<int, int> playerScores, CardStack[] commonPiles,
+        int? id = null, int? gameId = null)
     {
         Id = id;
         GameId = gameId;
@@ -33,7 +36,9 @@ public class GameRound
         _targetScore = targetScore;
     }
 
-    public static ErrorOr<GameRound> Create(IFactory<CardStack, CardStackType, Card> cardStackFactory, Guid gameId, int roundNumber, int targetScore, Dictionary<Guid, int> playerScores, Guid? id = null, CardStack[]? commonPiles = null)
+    public static ErrorOr<GameRound> Create(IFactory<CardStack, CardStackType, Card> cardStackFactory, int roundNumber,
+        int targetScore, Dictionary<int, int> playerScores, int? id = null, int? gameId = null,
+        CardStack[]? commonPiles = null)
     {
         try
         {
@@ -43,18 +48,25 @@ public class GameRound
         {
             return RoundSetupErrors.UnableToInitializeCommonPile;
         }
-        
+
         return new GameRound(
-            id ?? Guid.NewGuid(),
-            gameId,
             roundNumber,
             targetScore,
             playerScores,
-            commonPiles);
+            commonPiles,
+            gameId,
+            id);
     }
 
-    private static CardStack[] InitializeCommonPiles(IFactory<CardStack, CardStackType, Card> cardStackFactory, int playerCount)
+    private static CardStack[] InitializeCommonPiles(IFactory<CardStack, CardStackType, Card> cardStackFactory,
+        int playerCount)
     {
-        return Enumerable.Range(0, Deck.SUITS_PER_DECK * playerCount).Select(_ => cardStackFactory.Create(CardStackType.Common)).ToArray();
+        return Enumerable.Range(0, Deck.SUITS_PER_DECK * playerCount)
+            .Select(_ => cardStackFactory.Create(CardStackType.Common)).ToArray();
+    }
+
+    public GameRoundDataModel ToDataModel()
+    {
+        return new GameRoundDataModel();
     }
 }

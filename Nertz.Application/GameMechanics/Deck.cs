@@ -1,4 +1,4 @@
-using Nertz.Application.Nertz.Shared.Interfaces;
+using Nertz.Application.Shared.Interfaces;
 using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Nertz;

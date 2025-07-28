@@ -1,8 +1,8 @@
 using ErrorOr;
 using Microsoft.Extensions.Options;
 using Nertz.Application.Contracts;
-using Nertz.Application.Factories;
-using Nertz.Application.Nertz.Shared.Interfaces;
+using Nertz.Application.Shared.Factories;
+using Nertz.Application.Shared.Interfaces;
 using Nertz.Domain.Cards;
 
 namespace Nertz.Application.Nertz;
@@ -23,7 +23,7 @@ public class NertzApplication : INertz
         _shuffler = shuffler;
     }
     
-    public ErrorOr<Game> SetupGame(int targetScore, int maxPlayerCount, IEnumerable<Guid> playerIds)
+    public ErrorOr<Game> SetupGame(int targetScore, int maxPlayerCount, IEnumerable<int> playerIds)
     {
         return Game.CreateGame(_setupOptions, _cardStackFactory, _shuffler, targetScore, maxPlayerCount, playerIds.ToArray());
     }

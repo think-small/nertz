@@ -1,10 +1,10 @@
-using Nertz.Application.Factories;
+using Nertz.Application.Shared.Factories;
 using Nertz.Application.Nertz;
-using Nertz.Application.Nertz.Shared.Interfaces;
-using Nertz.Domain.Players;
-using Nertz.Application.Shared.Errors;
+using Nertz.Application.Shared.Interfaces;
+using Nertz.Application.Players;
 using Nertz.Domain.Strategies;
 using Nertz.Domain.Cards;
+using Nertz.Application.Shared.Errors;
 using NSubstitute;
 using Shouldly;
 
@@ -41,7 +41,7 @@ public class GameTests
     [Fact]
     public void Should_Create_Game()
     {
-        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid() };
+        var mockPlayerIds = new[] { 1, 2 };
         var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(false);
@@ -51,7 +51,7 @@ public class GameTests
     [Fact]
     public void Should_Error_If_Fewer_Than_2_Players()
     {
-        var mockPlayerIds = new[] { Guid.NewGuid() };
+        var mockPlayerIds = new[] { 1 };
         var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
@@ -62,7 +62,7 @@ public class GameTests
     [Fact]
     public void Should_Error_If_Player_Count_Exceeds_Max_Player_Setting()
     {
-        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
+        var mockPlayerIds = new[] { 1, 2, 3, 4 };
         var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, _mockSetupOptions.MinTargetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
@@ -75,7 +75,7 @@ public class GameTests
     [InlineData(101)]
     public void Should_Error_If_Target_Score_Is_Invalid(int targetScore)
     {
-        var mockPlayerIds = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
+        var mockPlayerIds = new[] { 1, 2, 3};
         var actual = Game.CreateGame(_mockSetupOptions, _mockCardStackFactory, _mockShuffle, targetScore, _mockSetupOptions.MaxPlayerCount, mockPlayerIds);
         
         actual.IsError.ShouldBe(true);
