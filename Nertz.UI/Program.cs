@@ -1,5 +1,7 @@
+using FastEndpoints;
+using FastEndpoints.Swagger;
 using Nertz.Application.Extensions;
-using Nertz.Application.Nertz;
+using Nertz.Infrastructure.Extensions;
 using Nertz.UI.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,9 +10,18 @@ builder.Configuration.AddUserSecrets<Program>();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
+    
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddNertzApi();
 builder.Services.AddNertzSetupOptions(builder.Configuration);
 builder.Services.AddNertzGameMechanics(builder.Configuration);
+builder.Services.AddInfrastructure();
+
+builder.Services.AddHttpClient("Nertz.API", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7075/api");
+});
+builder.Services.AddScoped(s => s.GetRequiredService<IHttpClientFactory>().CreateClient("Nertz.API"));
 
 var app = builder.Build();
 
@@ -31,4 +42,6 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
+app.UseFastEndpoints();
+app.UseSwaggerGen();
 app.Run();

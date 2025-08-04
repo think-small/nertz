@@ -88,7 +88,7 @@ public sealed class Game
     {
         return new GameDataModel
         {
-            Id = _id.Value,
+            Id = _id,
             TargetScore = _targetScore,
             MaxPlayerCount = _maxPlayerCount,
             PlayerIds = _players.Select(p => p.Id).ToArray(),

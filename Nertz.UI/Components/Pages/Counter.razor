@@ -1,9 +1,11 @@
 ﻿@page "/counter"
-@using System.Collections.Frozen
+@using System.Text
+@using System.Text.Json
 @using Nertz.Application.Contracts
 @using Nertz.Application.Nertz
 @rendermode InteractiveServer
 @inject INertz nertzApp
+@inject HttpClient http
 
 <PageTitle>Counter</PageTitle>
 
@@ -65,12 +67,26 @@ else
         currentCount++;
     }
 
-    private void SetupGame()
+    private async Task SetupGame()
     {
-
         var playerIds = Enumerable
             .Range(0, 3)
             .Select((i) => i + 1);
+
+        var requestBody = new StringContent(
+            JsonSerializer.Serialize(new
+            {
+                targetScore = 100,
+                maxPlayerCount = 3,
+                playerIds = playerIds
+            }),
+            Encoding.UTF8,
+            "application/json");
+
+        using var response = await http.PostAsync("api/nertz/game", requestBody);
+        response.EnsureSuccessStatusCode();
+
+        var data = await response.Content.ReadAsStringAsync();
         
         var gameSetupResult = nertzApp.SetupGame(100, 3, playerIds);
 

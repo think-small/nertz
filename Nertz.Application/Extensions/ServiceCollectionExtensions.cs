@@ -1,3 +1,5 @@
+using FastEndpoints;
+using FastEndpoints.Swagger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nertz.Application.Contracts;
@@ -11,6 +13,13 @@ namespace Nertz.Application.Extensions;
 
 public static class ServiceCollectionExtensions  
 {
+    public static IServiceCollection AddNertzApi(this IServiceCollection services)
+    {
+        services.AddFastEndpoints();
+        services.SwaggerDocument();
+        return services;
+    }
+    
     public static IServiceCollection AddNertzSetupOptions(this IServiceCollection services, IConfiguration config)
     {
         services.Configure<GameSetupOptions>(config.GetSection(GameSetupOptions.NertzSetup));

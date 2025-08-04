@@ -3,7 +3,7 @@ CREATE PROCEDURE nertz.create_game_round(
     game_id INTEGER,
     round_number INTEGER,
     target_score INTEGER,
-    created_at TIMESTAMP,
+    created_at TIMESTAMP WITH TIME ZONE,
     OUT new_round_id INTEGER
 )
 LANGUAGE plpgsql
