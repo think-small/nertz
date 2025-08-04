@@ -1,7 +1,7 @@
+using Nertz.Application.Features.Players;
 using Nertz.Application.Shared.Factories;
 using Nertz.Application.Nertz;
 using Nertz.Application.Shared.Interfaces;
-using Nertz.Application.Players;
 using Nertz.Domain.Strategies;
 using Nertz.Domain.Cards;
 using Nertz.Application.Shared.Errors;

@@ -1,6 +1,6 @@
 using Nertz.Domain.Cards;
 
-namespace Nertz.Application.Players;
+namespace Nertz.Application.Features.Players;
 
 public sealed class PlayerHand
 {

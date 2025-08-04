@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Nertz.Application.Extensions;
+using Nertz.Application.Nertz.Features.Games;
 using Nertz.Infrastructure.Extensions;
 using Nertz.UI.Components;
 
@@ -41,6 +42,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+app.MapHub<GameHub>("/game");
 
 app.UseFastEndpoints();
 app.UseSwaggerGen();

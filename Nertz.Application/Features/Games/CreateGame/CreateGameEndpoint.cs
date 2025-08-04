@@ -1,14 +1,17 @@
 using FastEndpoints;
 using ErrorOr;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 using Nertz.Application.Shared.Factories;
 using Nertz.Application.Shared.Interfaces;
 using Nertz.Domain.Cards;
 using Nertz.Infrastructure.Contracts;
+using Created = Microsoft.AspNetCore.Http.HttpResults.Created;
 
-namespace Nertz.Application.Nertz.Features.CreateGame;
+namespace Nertz.Application.Nertz.Features.Games;
 
-public class CreateGameEndpoint : Endpoint<CreateGameRequest, CreateGameResponse>
+public class CreateGameEndpoint : Endpoint<CreateGameCommand, ErrorOr<CreateGameResponse>>
 {
     private readonly GameSetupOptions _setupOptions;
     private readonly IFactory<CardStack, CardStackType, Card> _cardStackFactory;
@@ -33,22 +36,15 @@ public class CreateGameEndpoint : Endpoint<CreateGameRequest, CreateGameResponse
         AllowAnonymous(); // TODO - remove when auth is in place
     }
 
-    public override async Task<ErrorOr<int>> HandleAsync(CreateGameRequest req, CancellationToken cancelToken)
+    public override async Task<Results<Created, UnprocessableEntity, ProblemDetails>> HandleAsync(CreateGameCommand command, CancellationToken cancelToken)
     {
-        var gameResult = Game.CreateGame(_setupOptions, _cardStackFactory, _shuffler, req.TargetScore, req.MaxPlayerCount, req.PlayerIds);
+        var response = await command.ExecuteAsync(cancelToken);
 
-        if (gameResult.IsError)
+        if (response.IsError)
         {
-            throw new NotImplementedException();
+            return TypedResults.UnprocessableEntity();
         }
         
-        var dbResult = await _repository.CreateGame(gameResult.Value.ToDataModel(), cancelToken);
-
-        if (dbResult.IsError)
-        {
-            throw new NotImplementedException();
-        }
-        
-        return dbResult.Value;
+        return TypedResults.Created();
     }
 }

@@ -1,8 +1,8 @@
 using System.Collections.Frozen;
 using ErrorOr;
+using Nertz.Application.Features.Players;
 using Nertz.Application.Shared.Factories;
 using Nertz.Application.Shared.Interfaces;
-using Nertz.Application.Players;
 using Nertz.Application.Shared.Errors;
 using Nertz.Domain.Cards;
 using Nertz.Infrastructure.DataModels;

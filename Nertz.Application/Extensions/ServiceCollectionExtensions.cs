@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddFastEndpoints();
         services.SwaggerDocument();
+        services.AddSignalR();
         return services;
     }
     
