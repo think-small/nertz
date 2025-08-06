@@ -3,6 +3,7 @@ using Dapper;
 using ErrorOr;
 using Microsoft.Extensions.Configuration;
 using Nertz.Infrastructure.Contracts;
+using Nertz.Infrastructure.DataModels;
 using Npgsql;
 
 namespace Nertz.Infrastructure.Repositories;
@@ -14,6 +15,28 @@ public class RoomRepository : IRoomRepository
     public RoomRepository(IConfiguration configuration)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
+    }
+
+    public async Task<ErrorOr<IEnumerable<RoomDataModel>>> GetRooms(bool shouldGetOnlyOpenRooms, CancellationToken cancelToken)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancelToken);
+
+        try
+        {
+            var getOpenRoomsCommand = new CommandDefinition(
+                commandText: $"SELECT {Functions.GetRooms}(@open_only)",
+                new { open_only = shouldGetOnlyOpenRooms },
+                commandType: CommandType.Text,
+                cancellationToken: cancelToken);
+
+            var rooms = await connection.QueryAsync<RoomDataModel>(getOpenRoomsCommand);
+            return rooms.ToList();
+        }
+        catch (Exception e)
+        {
+            return RoomErrors.UnableToRetrieveOpenRooms(e);
+        }
     }
     
     public async Task<ErrorOr<int>> CreateRoom(string name, int hostId, int maxPlayerCount, int targetScore, DateTimeOffset createdAt, CancellationToken cancelToken)

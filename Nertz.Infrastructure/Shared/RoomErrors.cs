@@ -38,4 +38,13 @@ public class RoomErrors
             description: "Unable to delete room.",
             metadata: metadata);
     }
+    
+    public static Error UnableToRetrieveOpenRooms(Exception e)
+    {
+        var metadata = new Dictionary<string, object>() { { "Exception", e }  };
+        return Error.Unexpected(
+            code: "RoomErrors.UnableToRetrieveOpenRooms",
+            description: "Unable to retrieve all open rooms.",
+            metadata: metadata);
+    }
 }
