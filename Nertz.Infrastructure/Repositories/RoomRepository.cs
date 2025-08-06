@@ -16,7 +16,7 @@ public class RoomRepository : IRoomRepository
         _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
     }
     
-    public async Task<ErrorOr<int>> CreateRoom(string name, DateTimeOffset createdAt, CancellationToken cancelToken)
+    public async Task<ErrorOr<int>> CreateRoom(string name, int hostId, int maxPlayerCount, DateTimeOffset createdAt, CancellationToken cancelToken)
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancelToken);
@@ -26,6 +26,8 @@ public class RoomRepository : IRoomRepository
             var parameters = new DynamicParameters();
             parameters.Add("created_at", createdAt, dbType: DbType.DateTimeOffset);
             parameters.Add("name", name, dbType: DbType.String);
+            parameters.Add("host_id", hostId, dbType: DbType.Int32);
+            parameters.Add("max_player_count", maxPlayerCount, dbType: DbType.Int32);
             parameters.Add("new_room_id", dbType: DbType.Int32, direction: ParameterDirection.Output);;
             var createRoomCommand = new CommandDefinition(
                 StoredProcs.CreateRoom,

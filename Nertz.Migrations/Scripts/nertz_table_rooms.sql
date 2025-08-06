@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS nertz.rooms(
     id SERIAL PRIMARY KEY,
+    host_id INT NOT NULL,
     name TEXT NOT NULL,
+    max_player_count INT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE NULL,
     deleted_at TIMESTAMP WITH TIME ZONE NULL
