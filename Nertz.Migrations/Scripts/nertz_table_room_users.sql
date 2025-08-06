@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS nertz.room_users(
-    roomId INT NOT NULL,
-    userId INT NOT NULL,
-    UNIQUE(roomId, userId)
+    room_id INT NOT NULL,
+    player_id INT NOT NULL,
+    UNIQUE(room_id, player_id)
 )

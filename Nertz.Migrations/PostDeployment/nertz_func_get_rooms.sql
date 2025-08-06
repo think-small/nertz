@@ -18,7 +18,7 @@ BEGIN
         nertz.rooms.max_player_count,
         nertz.rooms.target_score
     FROM nertz.rooms
-    WHERE open_only IS TRUE AND deleted_at IS NOT NULL 
-    OR open_only IS FALSE AND deleted_at IS NULL;
+    WHERE open_only IS TRUE AND deleted_at IS NULL 
+    OR open_only IS FALSE;
 END;
 $$

@@ -6,7 +6,7 @@ CREATE PROCEDURE nertz.join_room(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO nertz.room_users(round_id, player_id)
+    INSERT INTO nertz.room_users(room_id, player_id)
     VALUES (room_id, player_id);
 END;
 $$
