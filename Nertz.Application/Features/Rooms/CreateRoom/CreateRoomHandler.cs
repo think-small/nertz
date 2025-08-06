@@ -20,7 +20,7 @@ public class CreateRoomHandler : ICommandHandler<CreateRoomCommand, ErrorOr<Crea
     
     public async Task<ErrorOr<CreateRoomResponse>> ExecuteAsync(CreateRoomCommand command, CancellationToken cancelToken = default)
     {
-        var createRoomResponse = await _repository.CreateRoom(command.Name, command.HostId, command.MaxPlayerCount,  _timeProvider.GetUtcNow(), cancelToken);
+        var createRoomResponse = await _repository.CreateRoom(command.Name, command.HostId, command.MaxPlayerCount, command.TargetScore, _timeProvider.GetUtcNow(), cancelToken);
 
         if (createRoomResponse.IsError)
         {
