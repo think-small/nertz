@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <UserSecretsId>62c7c171-99be-4cfd-a00b-3d5064157d2f</UserSecretsId>
+        <RootNamespace>Nertz.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

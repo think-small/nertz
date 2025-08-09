@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Nertz.Application\Nertz.Application.csproj" />
+      <ProjectReference Include="..\Nertz.API\Nertz.API.csproj" />
       <ProjectReference Include="..\Nertz.Domain\Nertz.Domain.csproj" />
     </ItemGroup>
 

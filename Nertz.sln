@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Domain", "Nertz.Domain\Nertz.Domain.csproj", "{4DD02197-6054-4DC3-A0D2-5A0A72C11188}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Application", "Nertz.Application\Nertz.Application.csproj", "{291EFC08-C9CE-4D5C-8A2E-969F2470B0CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.API", "Nertz.API\Nertz.API.csproj", "{291EFC08-C9CE-4D5C-8A2E-969F2470B0CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nertz.Tests", "Nertz.Tests\Nertz.Tests.csproj", "{F5926787-8688-452A-94E3-71F7A584FED1}"
 EndProject
