@@ -25,7 +25,7 @@ public class RoomRepository : IRoomRepository
         try
         {
             var getOpenRoomsCommand = new CommandDefinition(
-                commandText: $"SELECT {Functions.GetRooms}(@open_only)",
+                commandText: $"SELECT * FROM {Functions.GetRooms}(@open_only)",
                 new { open_only = shouldGetOnlyOpenRooms },
                 commandType: CommandType.Text,
                 cancellationToken: cancelToken);
