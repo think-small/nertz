@@ -1,7 +1,7 @@
 using FastEndpoints;
 using ErrorOr;
 
-namespace Nertz.Application.Nertz.Features.Rooms.GetOpenRooms;
+namespace Nertz.API.Features.Rooms;
 
 public class GetOpenRoomsCommand : ICommand<ErrorOr<GetOpenRoomsResponse>>
 {

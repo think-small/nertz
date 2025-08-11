@@ -1,9 +1,9 @@
 using FastEndpoints;
 using Microsoft.AspNetCore.SignalR;
-using Nertz.Application.Nertz.Features.Games;
-using Nertz.Application.Shared.Events;
+using Nertz.API.Features.Games;
+using Nertz.API.Shared.Events;
 
-namespace Nertz.Application.Nertz.Features.Rooms;
+namespace Nertz.API.Features.Rooms;
 
 public class GameCreatedEventHandler : IEventHandler<GameCreatedEvent>
 {

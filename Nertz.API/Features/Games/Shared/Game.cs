@@ -1,13 +1,13 @@
 using System.Collections.Frozen;
 using ErrorOr;
-using Nertz.Application.Features.Players;
-using Nertz.Application.Shared.Factories;
-using Nertz.Application.Shared.Interfaces;
-using Nertz.Application.Shared.Errors;
+using Nertz.API.Features.Players;
+using Nertz.API.Shared.Factories;
+using Nertz.API.Shared.Interfaces;
+using Nertz.API.Shared.Errors;
 using Nertz.Domain.Cards;
 using Nertz.Infrastructure.DataModels;
 
-namespace Nertz.Application.Nertz;
+namespace Nertz.API.Features.Games.Shared;
 
 public sealed class Game
 {

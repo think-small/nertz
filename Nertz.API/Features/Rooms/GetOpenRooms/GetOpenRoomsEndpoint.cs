@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using ProblemDetails = FastEndpoints.ProblemDetails;
 
-namespace Nertz.Application.Nertz.Features.Rooms.GetOpenRooms;
+namespace Nertz.API.Features.Rooms;
 
 [FastEndpoints.HttpGet("api/rooms")]
 [AllowAnonymous]

@@ -1,6 +1,6 @@
 using Nertz.Infrastructure.DataModels;
 
-namespace Nertz.Application.Nertz.Features.Rooms.Shared;
+namespace Nertz.API.Features.Rooms.Shared;
 
 public class Room
 {

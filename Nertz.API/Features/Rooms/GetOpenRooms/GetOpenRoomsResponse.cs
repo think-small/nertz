@@ -1,6 +1,6 @@
-using Nertz.Application.Nertz.Features.Rooms.Shared;
+using Nertz.API.Features.Rooms.Shared;
 
-namespace Nertz.Application.Nertz.Features.Rooms.GetOpenRooms;
+namespace Nertz.API.Features.Rooms;
 
 public class GetOpenRoomsResponse
 {

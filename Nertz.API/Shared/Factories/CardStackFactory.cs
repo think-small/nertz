@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Options;
-using Nertz.Application.Nertz;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Features.Games.Shared;
+using Nertz.API.Shared.Interfaces;
 using Nertz.Domain.Cards;
 using Nertz.Domain.Strategies;
 
-namespace Nertz.Application.Shared.Factories;
+namespace Nertz.API.Shared.Factories;
 
 public enum CardStackType 
 {

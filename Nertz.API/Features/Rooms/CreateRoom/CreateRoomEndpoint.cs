@@ -1,9 +1,8 @@
 using FastEndpoints;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Created = Microsoft.AspNetCore.Http.HttpResults.Created;
 
-namespace Nertz.Application.Nertz.Features.Rooms.CreateRoom;
+namespace Nertz.API.Features.Rooms;
 
 public class CreateRoomEndpoint : Endpoint<CreateRoomCommand, CreateRoomResponse>
 {

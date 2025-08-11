@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Shared.Interfaces;
 
-namespace Nertz.Application.Nertz.Features.Games;
+namespace Nertz.API.Features.Games;
 
 public class GameHub : Hub<IGameHub>
 {

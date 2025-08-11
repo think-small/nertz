@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Nertz.Infrastructure.Contracts;
 using Nertz.Infrastructure.Repositories;
 
-namespace Nertz.Application.Extensions;
+namespace Nertz.API.Extensions;
 
 public static class InfrastructureCollectionExtensions
 {

@@ -1,9 +1,10 @@
 using FastEndpoints;
 using ErrorOr;
 using Microsoft.AspNetCore.SignalR;
+using Nertz.API.Features.Rooms.Shared;
 using Nertz.Infrastructure.Contracts;
 
-namespace Nertz.Application.Nertz.Features.Rooms.CreateRoom;
+namespace Nertz.API.Features.Rooms;
 
 public class CreateRoomHandler : ICommandHandler<CreateRoomCommand, ErrorOr<CreateRoomResponse>>
 {

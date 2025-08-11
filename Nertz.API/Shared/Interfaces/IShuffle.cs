@@ -1,4 +1,4 @@
-namespace Nertz.Application.Shared.Interfaces;
+namespace Nertz.API.Shared.Interfaces;
 
 public interface IShuffle
 {

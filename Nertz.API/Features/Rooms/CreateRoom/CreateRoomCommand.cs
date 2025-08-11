@@ -1,7 +1,7 @@
 using FastEndpoints;
 using ErrorOr;
 
-namespace Nertz.Application.Nertz.Features.Rooms.CreateRoom;
+namespace Nertz.API.Features.Rooms;
 
 public class CreateRoomCommand : ICommand<ErrorOr<CreateRoomResponse>>
 {

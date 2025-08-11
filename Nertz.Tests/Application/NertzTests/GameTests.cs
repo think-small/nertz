@@ -1,10 +1,10 @@
-using Nertz.Application.Features.Players;
-using Nertz.Application.Shared.Factories;
-using Nertz.Application.Nertz;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Features.Players;
+using Nertz.API.Shared.Factories;
+using Nertz.API.Features.Games.Shared;
+using Nertz.API.Shared.Interfaces;
 using Nertz.Domain.Strategies;
 using Nertz.Domain.Cards;
-using Nertz.Application.Shared.Errors;
+using Nertz.API.Shared.Errors;
 using NSubstitute;
 using Shouldly;
 

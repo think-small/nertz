@@ -1,15 +1,12 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Nertz.Application.Contracts;
-using Nertz.Application.Shared.Factories;
-using Nertz.Application.Nertz;
-using Nertz.Application.Shared.Interfaces;
-using Nertz.Application.Shared.Utility;
+using Nertz.API.Features.Games.Shared;
+using Nertz.API.Shared.Factories;
+using Nertz.API.Shared.Interfaces;
+using Nertz.API.Shared.Utility;
 using Nertz.Domain.Cards;
 
-namespace Nertz.Application.Extensions;
+namespace Nertz.API.Extensions;
 
 public static class ServiceCollectionExtensions  
 {
@@ -31,9 +28,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IFactory<CardStack, CardStackType, Card>, CardStackFactory>();
         services.AddScoped<IShuffle, RandomShuffle>();
-
-        services.AddScoped<INertz, NertzApplication>();
-        
         return services;
     }
 }

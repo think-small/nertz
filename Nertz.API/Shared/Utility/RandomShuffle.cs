@@ -1,6 +1,6 @@
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Shared.Interfaces;
 
-namespace Nertz.Application.Shared.Utility;
+namespace Nertz.API.Shared.Utility;
 
 public class RandomShuffle : IShuffle
 {

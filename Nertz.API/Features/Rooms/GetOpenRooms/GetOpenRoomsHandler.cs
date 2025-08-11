@@ -1,9 +1,9 @@
 using FastEndpoints;
 using ErrorOr;
-using Nertz.Application.Nertz.Features.Rooms.Shared;
+using Nertz.API.Features.Rooms.Shared;
 using Nertz.Infrastructure.Contracts;
 
-namespace Nertz.Application.Nertz.Features.Rooms.GetOpenRooms;
+namespace Nertz.API.Features.Rooms;
 
 public class GetOpenRoomsHandler : ICommandHandler<GetOpenRoomsCommand, ErrorOr<GetOpenRoomsResponse>>
 {

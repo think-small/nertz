@@ -1,4 +1,4 @@
-namespace Nertz.Application.Features.Players;
+namespace Nertz.API.Features.Players;
 
 public class Player
 {

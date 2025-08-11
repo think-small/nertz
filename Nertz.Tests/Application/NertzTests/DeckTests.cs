@@ -1,5 +1,5 @@
-using Nertz.Application.Nertz;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Features.Games.Shared;
+using Nertz.API.Shared.Interfaces;
 using Nertz.Domain.Cards;
 using NSubstitute;
 using Shouldly;

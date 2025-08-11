@@ -1,7 +1,7 @@
 using FastEndpoints;
-using Nertz.Application.Nertz;
+using Nertz.API.Features.Games.Shared;
 
-namespace Nertz.Application.Shared.Events;
+namespace Nertz.API.Shared.Events;
 
 public class GameCreatedEvent : IEvent
 {

@@ -1,7 +1,7 @@
 using ErrorOr;
 using FastEndpoints;
 
-namespace Nertz.Application.Nertz.Features.Games;
+namespace Nertz.API.Features.Games;
 
 public class CreateGameCommand : ICommand<ErrorOr<CreateGameResponse>>
 {

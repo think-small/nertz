@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Shared.Interfaces;
 
-namespace Nertz.Application.Nertz.Features.Rooms;
+namespace Nertz.API.Features.Rooms.Shared;
 
 public class RoomHub : Hub<IRoomHub>
 {

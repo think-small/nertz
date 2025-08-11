@@ -1,15 +1,15 @@
 using FastEndpoints;
 using ErrorOr;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
-using Nertz.Application.Shared.Factories;
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Features.Games.Shared;
+using Nertz.API.Shared.Factories;
+using Nertz.API.Shared.Interfaces;
 using Nertz.Domain.Cards;
 using Nertz.Infrastructure.Contracts;
 using Created = Microsoft.AspNetCore.Http.HttpResults.Created;
 
-namespace Nertz.Application.Nertz.Features.Games;
+namespace Nertz.API.Features.Games;
 
 public class CreateGameEndpoint : Endpoint<CreateGameCommand, ErrorOr<CreateGameResponse>>
 {

@@ -1,6 +1,6 @@
 using ErrorOr;
 
-namespace Nertz.Application.Shared.Errors;
+namespace Nertz.API.Shared.Errors;
 
 public static class GameSetupErrors
 {

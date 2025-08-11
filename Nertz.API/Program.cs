@@ -1,7 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using Nertz.Application.Extensions;
-using Nertz.Application.Nertz.Features.Games;
+using Nertz.API.Extensions;
+using Nertz.API.Features.Games;
 using Nertz.Infrastructure.Extensions;
 
 namespace Nertz.Application

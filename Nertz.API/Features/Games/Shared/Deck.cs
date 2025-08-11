@@ -1,7 +1,7 @@
-using Nertz.Application.Shared.Interfaces;
+using Nertz.API.Shared.Interfaces;
 using Nertz.Domain.Cards;
 
-namespace Nertz.Application.Nertz;
+namespace Nertz.API.Features.Games.Shared;
 
 public static class Deck
 {

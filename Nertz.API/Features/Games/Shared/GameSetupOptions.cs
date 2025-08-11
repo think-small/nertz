@@ -1,4 +1,4 @@
-namespace Nertz.Application.Nertz;
+namespace Nertz.API.Features.Games.Shared;
 
 public class GameSetupOptions
 {

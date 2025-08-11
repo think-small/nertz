@@ -1,4 +1,4 @@
-namespace Nertz.Application.Nertz;
+namespace Nertz.API.Features.Games;
 
 public sealed class GameResult
 {

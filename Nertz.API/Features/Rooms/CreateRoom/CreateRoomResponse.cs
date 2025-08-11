@@ -1,4 +1,4 @@
-namespace Nertz.Application.Nertz.Features.Rooms.CreateRoom;
+namespace Nertz.API.Features.Rooms;
 
 public class CreateRoomResponse
 {
