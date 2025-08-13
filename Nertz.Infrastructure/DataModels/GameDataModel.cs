@@ -3,6 +3,7 @@ namespace Nertz.Infrastructure.DataModels;
 public class GameDataModel
 {
     public int? Id { get; init; }
+    public int RoomId { get; init; }
     public int TargetScore { get; init; }
     public int MaxPlayerCount { get; init; }
     public required int[] PlayerIds { get; init; }

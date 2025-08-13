@@ -8,4 +8,5 @@ public class CreateGameCommand : ICommand<ErrorOr<CreateGameResponse>>
     public int TargetScore { get; init; }
     public int MaxPlayerCount { get; init; }
     public required int[] PlayerIds { get; init; }
+    public int RoomId { get; init; }
 }

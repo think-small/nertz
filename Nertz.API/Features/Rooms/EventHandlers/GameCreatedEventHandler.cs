@@ -1,6 +1,7 @@
 using FastEndpoints;
 using Microsoft.AspNetCore.SignalR;
 using Nertz.API.Features.Games;
+using Nertz.API.Features.Rooms.Shared;
 using Nertz.API.Shared.Events;
 
 namespace Nertz.API.Features.Rooms;
@@ -14,9 +15,11 @@ public class GameCreatedEventHandler : IEventHandler<GameCreatedEvent>
         _hubContext = hubContext;
     }
     
-    public Task HandleAsync(GameCreatedEvent eventModel, CancellationToken cancelToken = default)
+    public async Task HandleAsync(GameCreatedEvent eventModel, CancellationToken cancelToken = default)
     {
-        Console.WriteLine(eventModel);
-        return Task.CompletedTask;
+        await _hubContext.Clients.Group(RoomHub.GetRoomHubGroupName(eventModel.RoomId)).SendAsync(
+            nameof(RoomHub.StartGame),
+            eventModel.Game.ToDataModel().Id,
+            CancellationToken.None);
     }
 }

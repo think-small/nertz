@@ -31,7 +31,7 @@ public class CreateGameHandler : ICommandHandler<CreateGameCommand, ErrorOr<Crea
 
     public async Task<ErrorOr<CreateGameResponse>> ExecuteAsync(CreateGameCommand command, CancellationToken cancelToken = default)
     {
-        var gameResult = Game.CreateGame(_setupOptions, _cardStackFactory, _shuffler, command.TargetScore, command.MaxPlayerCount, command.PlayerIds);
+        var gameResult = Game.CreateGame(_setupOptions, _cardStackFactory, _shuffler, command.TargetScore, command.MaxPlayerCount, command.PlayerIds, command.RoomId);
 
         if (gameResult.IsError)
         {
@@ -45,7 +45,7 @@ public class CreateGameHandler : ICommandHandler<CreateGameCommand, ErrorOr<Crea
             throw new NotImplementedException();
         }
 
-        await new GameCreatedEvent { Game = gameResult.Value }.PublishAsync(Mode.WaitForNone, CancellationToken.None);
+        await new GameCreatedEvent { Game = gameResult.Value, RoomId = command.RoomId }.PublishAsync(Mode.WaitForNone, CancellationToken.None);
         return new CreateGameResponse { GameId = dbResult.Value };
     }
 }

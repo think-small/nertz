@@ -14,10 +14,10 @@ public class NertzRepository : INertzRepository
 {
     private readonly string _connectionString;
     private readonly TimeProvider _timeProvider;
-    public NertzRepository(IConfiguration configuration, TimeProvider timeprovider)
+    public NertzRepository(IConfiguration configuration, TimeProvider timeProvider)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
-        _timeProvider = timeprovider;
+        _timeProvider = timeProvider;
     }
     
     public async Task<ErrorOr<int>> CreateGame(GameDataModel game, CancellationToken cancelToken = default)
@@ -31,6 +31,7 @@ public class NertzRepository : INertzRepository
             var now = _timeProvider.GetUtcNow();
             
             var gameParameters = new DynamicParameters();
+            gameParameters.Add("room_id", game.RoomId, dbType: DbType.Int32);;
             gameParameters.Add("created_at", now, dbType: DbType.DateTimeOffset);
             gameParameters.Add("new_game_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
             var createGameCommand = new CommandDefinition(StoredProcs.CreateGame, gameParameters, transaction, commandType: CommandType.StoredProcedure, cancellationToken: cancelToken);

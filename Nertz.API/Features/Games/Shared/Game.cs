@@ -12,6 +12,7 @@ namespace Nertz.API.Features.Games.Shared;
 public sealed class Game
 {
     private readonly int? _id;
+    private readonly int _roomId;
     private readonly GameSetupOptions _setupOptions;
     private readonly IFactory<CardStack, CardStackType, Card> _cardStackFactory;
     private readonly int _targetScore;
@@ -30,6 +31,7 @@ public sealed class Game
         Player[] players,
         IList<GameRound> rounds,
         GameResult gameResult,
+        int roomId,
         int? id = null)
     {
         var suitCount = Enum.GetValues(typeof(Suit)).Length;
@@ -40,6 +42,7 @@ public sealed class Game
         _cardStackFactory = cardStackFactory;
         _rounds = rounds;
         _gameResult = gameResult;
+        _roomId = roomId;
         _id = id;
     }
     
@@ -50,6 +53,7 @@ public sealed class Game
         int targetScore,
         int maxPlayerCount,
         IEnumerable<int> playerIds,
+        int roomId,
         IList<GameRound>? rounds = null)
     {
         var setupErrors = new List<Error>();
@@ -81,7 +85,7 @@ public sealed class Game
             PlayerScores = CreateInitialPlayerScores(players)
         };
         
-        return new Game(setupOptions, cardStackFactory, targetScore, maxPlayerCount, players, rounds ?? [], gameResult);
+        return new Game(setupOptions, cardStackFactory, targetScore, maxPlayerCount, players, rounds ?? [], gameResult, roomId);
     }
 
     public GameDataModel ToDataModel()
@@ -89,6 +93,7 @@ public sealed class Game
         return new GameDataModel
         {
             Id = _id,
+            RoomId = _roomId,
             TargetScore = _targetScore,
             MaxPlayerCount = _maxPlayerCount,
             PlayerIds = _players.Select(p => p.Id).ToArray(),

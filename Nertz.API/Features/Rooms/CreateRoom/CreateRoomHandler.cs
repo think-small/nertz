@@ -1,6 +1,5 @@
 using FastEndpoints;
 using ErrorOr;
-using Microsoft.AspNetCore.SignalR;
 using Nertz.API.Features.Rooms.Shared;
 using Nertz.Infrastructure.Contracts;
 
@@ -10,13 +9,11 @@ public class CreateRoomHandler : ICommandHandler<CreateRoomCommand, ErrorOr<Crea
 {
     private readonly IRoomRepository _repository;
     private readonly TimeProvider _timeProvider;
-    private readonly IHubContext<RoomHub> _hubContext;
 
-    public CreateRoomHandler(IRoomRepository repository, TimeProvider timeProvider, IHubContext<RoomHub> hubContext)
+    public CreateRoomHandler(IRoomRepository repository, TimeProvider timeProvider)
     {
         _repository = repository;
         _timeProvider = timeProvider;
-        _hubContext = hubContext;
     }
     
     public async Task<ErrorOr<CreateRoomResponse>> ExecuteAsync(CreateRoomCommand command, CancellationToken cancelToken = default)
@@ -35,9 +32,8 @@ public class CreateRoomHandler : ICommandHandler<CreateRoomCommand, ErrorOr<Crea
             throw new NotImplementedException();
         }
 
-        // TODO - send list of updated available rooms to clients.
-        //        Since the list of rooms may be changing frequently,
-        //        consider use of a pessimistic lock for retrieval.
+        await new RoomCreatedEvent().PublishAsync(Mode.WaitForNone, CancellationToken.None);
+        
         return new CreateRoomResponse { RoomId = createRoomResponse.Value };
     }
 }
