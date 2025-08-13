@@ -12,20 +12,20 @@ public class RoomHub : Hub<IRoomClient>
    
    public async Task JoinRoom(int roomId)
    {
-      await Groups.AddToGroupAsync(Context.ConnectionId, GetRoomHubGroupName(roomId));
+      await Groups.AddToGroupAsync(Context.ConnectionId, GetGroupName(roomId));
    }
    
    public async Task LeaveRoom(int roomId)
    {
-      await Groups.RemoveFromGroupAsync(Context.ConnectionId, GetRoomHubGroupName(roomId));
+      await Groups.RemoveFromGroupAsync(Context.ConnectionId, GetGroupName(roomId));
    }
    
    public async Task StartGame(int roomId, int gameId)
    {
-      await Clients.Group(GetRoomHubGroupName(roomId)).GameStarted(gameId);
+      await Clients.Group(GetGroupName(roomId)).GameStarted(gameId);
    }
 
-   public static string GetRoomHubGroupName(int roomId)
+   public static string GetGroupName(int roomId)
    {
       return $"room-{roomId}";
    }

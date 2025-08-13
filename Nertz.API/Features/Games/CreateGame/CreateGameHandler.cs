@@ -45,7 +45,7 @@ public class CreateGameHandler : ICommandHandler<CreateGameCommand, ErrorOr<Crea
             throw new NotImplementedException();
         }
 
-        await new GameCreatedEvent { Game = gameResult.Value, RoomId = command.RoomId }.PublishAsync(Mode.WaitForNone, CancellationToken.None);
+        await new GameCreatedEvent { GameId = dbResult.Value, RoomId = command.RoomId }.PublishAsync(Mode.WaitForNone, CancellationToken.None);
         return new CreateGameResponse { GameId = dbResult.Value };
     }
 }

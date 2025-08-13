@@ -17,9 +17,9 @@ public class GameCreatedEventHandler : IEventHandler<GameCreatedEvent>
     
     public async Task HandleAsync(GameCreatedEvent eventModel, CancellationToken cancelToken = default)
     {
-        await _hubContext.Clients.Group(RoomHub.GetRoomHubGroupName(eventModel.RoomId)).SendAsync(
+        await _hubContext.Clients.Group(RoomHub.GetGroupName(eventModel.RoomId)).SendAsync(
             nameof(RoomHub.StartGame),
-            eventModel.Game.ToDataModel().Id,
+            eventModel.GameId,
             CancellationToken.None);
     }
 }
