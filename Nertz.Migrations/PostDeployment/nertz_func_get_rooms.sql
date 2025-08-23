@@ -4,19 +4,22 @@ CREATE FUNCTION nertz.get_rooms(
 )
 RETURNS TABLE(
     Id INT,
-    HostId INT,
+    HostUserName TEXT,
     Name TEXT,
     MaxPlayerCount INT,
-    TargetScore INT)
+    TargetScore INT,
+    CurrentPlayerCount INT)
 LANGUAGE sql
 AS $$
     SELECT
-        nertz.rooms.id,
-        nertz.rooms.host_id,
-        nertz.rooms.name,
-        nertz.rooms.max_player_count,
-        nertz.rooms.target_score
-    FROM nertz.rooms
+        r.id,
+        u.username,
+        r.name,
+        r.max_player_count,
+        r.target_score,
+        (SELECT MAX(player_count) FROM (SELECT ROW_NUMBER() OVER (PARTITION BY room_id) AS player_count FROM nertz.room_users) as rnk) as current_player_count
+    FROM nertz.rooms r
+    JOIN nertz.users u ON u.id = r.host_id
     WHERE open_only IS TRUE AND deleted_at IS NULL 
     OR open_only IS FALSE;
 $$

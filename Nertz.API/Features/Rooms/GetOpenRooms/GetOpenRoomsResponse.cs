@@ -4,5 +4,5 @@ namespace Nertz.API.Features.Rooms;
 
 public class GetOpenRoomsResponse
 {
-    public IEnumerable<Room> Rooms { get; init; } = [];
+    public IEnumerable<RoomListItemVM> Rooms { get; init; } = [];
 }

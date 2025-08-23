@@ -23,6 +23,6 @@ public class GetOpenRoomsHandler : ICommandHandler<GetOpenRoomsCommand, ErrorOr<
             throw new NotImplementedException();
         }
 
-        return new GetOpenRoomsResponse { Rooms = roomsResponse.Value.Select(Room.FromDataModel) };
+        return new GetOpenRoomsResponse { Rooms = roomsResponse.Value.Select(RoomListItemVM.FromDataModel) };
     }
 }

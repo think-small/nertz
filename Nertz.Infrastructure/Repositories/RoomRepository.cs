@@ -39,7 +39,7 @@ public class RoomRepository : IRoomRepository
         }
     }
     
-    public async Task<ErrorOr<IEnumerable<RoomDataModel>>> GetRooms(bool shouldGetOnlyOpenRooms, CancellationToken cancelToken)
+    public async Task<ErrorOr<IEnumerable<RoomListItemDataModel>>> GetRooms(bool shouldGetOnlyOpenRooms, CancellationToken cancelToken)
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancelToken);
@@ -52,7 +52,7 @@ public class RoomRepository : IRoomRepository
                 commandType: CommandType.Text,
                 cancellationToken: cancelToken);
 
-            var rooms = await connection.QueryAsync<RoomDataModel>(getOpenRoomsCommand);
+            var rooms = await connection.QueryAsync<RoomListItemDataModel>(getOpenRoomsCommand);
             return rooms.ToList();
         }
         catch (Exception e)

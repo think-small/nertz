@@ -6,7 +6,7 @@ namespace Nertz.API.Features.Rooms.Shared;
 
 public class RoomHub : Hub<IRoomClient>
 {
-   public async Task SendOpenRooms(IEnumerable<Room> rooms)
+   public async Task SendOpenRooms(IEnumerable<RoomListItemVM> rooms)
    {
       await Clients.All.GetOpenRooms(rooms);
    }
