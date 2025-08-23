@@ -3,15 +3,14 @@ CREATE FUNCTION nertz.get_rooms(
     open_only BOOLEAN = TRUE
 )
 RETURNS TABLE(
-    id INT,
-    host_id INT,
-    name TEXT,
-    max_player_count INT,
-    target_score INT)
-LANGUAGE plpgsql
+    Id INT,
+    HostId INT,
+    Name TEXT,
+    MaxPlayerCount INT,
+    TargetScore INT)
+LANGUAGE sql
 AS $$
-BEGIN
-    RETURN QUERY SELECT
+    SELECT
         nertz.rooms.id,
         nertz.rooms.host_id,
         nertz.rooms.name,
@@ -20,5 +19,4 @@ BEGIN
     FROM nertz.rooms
     WHERE open_only IS TRUE AND deleted_at IS NULL 
     OR open_only IS FALSE;
-END;
 $$

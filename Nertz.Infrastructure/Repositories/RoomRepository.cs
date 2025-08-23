@@ -17,6 +17,28 @@ public class RoomRepository : IRoomRepository
         _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
     }
 
+    public async Task<ErrorOr<IEnumerable<UserDataModel>>> GetRoomPlayers(int roomId, CancellationToken cancelToken)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancelToken);
+
+        try
+        {
+            var getRoomPlayersCommand = new CommandDefinition(
+                commandText: $"SELECT * FROM {Functions.GetRoomPlayers}",
+                new { room_id = roomId },
+                commandType: CommandType.Text,
+                cancellationToken: cancelToken);
+
+            var roomPlayers = await connection.QueryAsync<UserDataModel>(getRoomPlayersCommand);
+            return roomPlayers.ToList();
+        }
+        catch (Exception e)
+        {
+            return RoomErrors.UnableToRetrievePlayers(e);
+        }
+    }
+    
     public async Task<ErrorOr<IEnumerable<RoomDataModel>>> GetRooms(bool shouldGetOnlyOpenRooms, CancellationToken cancelToken)
     {
         await using var connection = new NpgsqlConnection(_connectionString);

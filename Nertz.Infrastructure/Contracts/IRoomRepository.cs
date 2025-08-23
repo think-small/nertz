@@ -10,4 +10,5 @@ public interface IRoomRepository
     Task<ErrorOr<bool>> JoinRoom(int roomId, int playerId, CancellationToken cancelToken);
     Task<ErrorOr<bool>> LeaveRoom(int roomId, int playerId, CancellationToken cancelToken);
     Task<ErrorOr<bool>> DeleteRoom(int roomId, CancellationToken cancelToken);
+    Task<ErrorOr<IEnumerable<UserDataModel>>> GetRoomPlayers(int roomId, CancellationToken cancelToken);
 }

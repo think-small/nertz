@@ -10,4 +10,6 @@ public static class StoredProcs
     public const string JoinRoom = "nertz.join_room";
     public const string LeaveRoom = "nertz.leave_room";
     public const string DeleteRoom = "nertz.delete_room";
+
+    public const string GetUser = "nertz.get_user";
 }

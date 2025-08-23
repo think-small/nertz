@@ -4,6 +4,15 @@ namespace Nertz.Infrastructure;
 
 public class RoomErrors
 {
+    public static Error UnableToRetrievePlayers(Exception e)
+    {
+        var metadata = new Dictionary<string, object>() { { "Exception", e }  };
+        return Error.Unexpected(
+            code: "RoomErrors.UnableToRetrievePlayers",
+            description: "Unable to retrieve players for the room.",
+            metadata: metadata);
+    }
+    
     public static Error UnableToCreateRoom(Exception e)
     {
         var metadata = new Dictionary<string, object>() { { "Exception", e }  };
