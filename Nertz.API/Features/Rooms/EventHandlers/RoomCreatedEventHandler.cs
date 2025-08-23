@@ -18,13 +18,14 @@ public class RoomCreatedEventHandler : IEventHandler<RoomCreatedEvent>
     
     public async Task HandleAsync(RoomCreatedEvent eventModel, CancellationToken cancelToken)
     {
-        var rooms = await _repository.GetRooms(true, cancelToken);
+        var roomData = await _repository.GetRooms(true, cancelToken);
 
-        if (rooms.IsError)
+        if (roomData.IsError)
         {
             throw new NotImplementedException();
         }
         
-        await _hubContext.Clients.All.SendAsync(nameof(RoomHub.SendOpenRooms), rooms.Value, CancellationToken.None);
+        var rooms = roomData.Value.Select(RoomListItemVM.FromDataModel);
+        await _hubContext.Clients.All.SendAsync(nameof(RoomHub.SendOpenRooms), rooms, CancellationToken.None);
     }
 }
