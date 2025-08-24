@@ -32,7 +32,7 @@ public class CreateRoomHandler : ICommandHandler<CreateRoomCommand, ErrorOr<Crea
             throw new NotImplementedException();
         }
 
-        await new RoomCreatedEvent().PublishAsync(Mode.WaitForNone, CancellationToken.None);
+        await new RoomListUpdatedEvent().PublishAsync(Mode.WaitForNone, CancellationToken.None);
         
         return new CreateRoomResponse { RoomId = createRoomResponse.Value };
     }

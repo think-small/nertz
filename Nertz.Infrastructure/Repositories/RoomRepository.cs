@@ -17,7 +17,30 @@ public class RoomRepository : IRoomRepository
         _connectionString = configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
     }
 
-    public async Task<ErrorOr<IEnumerable<UserDataModel>>> GetRoomPlayers(int roomId, CancellationToken cancelToken)
+    public async Task<ErrorOr<bool>> AssignHost(int roomId, int hostId, CancellationToken cancelToken)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancelToken);
+
+        try
+        {
+            var assignHostCommand = new CommandDefinition(
+                commandText: $"SELECT * FROM {Functions.AssignHost}(@room_id, @host_id)",
+                new { room_id = roomId, host_id = hostId },
+                commandType: CommandType.Text,
+                cancellationToken: cancelToken);
+            
+            await connection.ExecuteAsync(assignHostCommand);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            return RoomErrors.UnableToAssignHost(e, roomId, hostId);
+        }
+    }
+    
+    public async Task<ErrorOr<IEnumerable<PlayerDataModel>>> GetRoomPlayers(int roomId, CancellationToken cancelToken)
     {
         await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancelToken);
@@ -25,17 +48,38 @@ public class RoomRepository : IRoomRepository
         try
         {
             var getRoomPlayersCommand = new CommandDefinition(
-                commandText: $"SELECT * FROM {Functions.GetRoomPlayers}",
+                commandText: $"SELECT * FROM {Functions.GetRoomPlayers}(@room_id)",
                 new { room_id = roomId },
                 commandType: CommandType.Text,
                 cancellationToken: cancelToken);
 
-            var roomPlayers = await connection.QueryAsync<UserDataModel>(getRoomPlayersCommand);
+            var roomPlayers = await connection.QueryAsync<PlayerDataModel>(getRoomPlayersCommand);
             return roomPlayers.ToList();
         }
         catch (Exception e)
         {
             return RoomErrors.UnableToRetrievePlayers(e);
+        }
+    }
+
+    public async Task<ErrorOr<RoomListItemDataModel>> GetRoom(int roomId, CancellationToken cancelToken)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancelToken);
+
+        try
+        {
+            var getRoomCommand = new CommandDefinition(
+                commandText: $"SELECT * FROM {Functions.GetRoom}",
+                new { room_id = roomId },
+                commandType: CommandType.Text,
+                cancellationToken: cancelToken);
+
+            return await connection.QuerySingleAsync<RoomListItemDataModel>(getRoomCommand);
+        }
+        catch (Exception e)
+        {
+            return RoomErrors.UnableToRetrieveRoom(e, roomId);
         }
     }
     
@@ -143,6 +187,29 @@ public class RoomRepository : IRoomRepository
         }
     }
 
+    public async Task<ErrorOr<bool>> MarkRoomForDeletion(int roomId, DateTimeOffset markForDeletionAt, CancellationToken cancelToken)
+    {
+        await using var connection = new NpgsqlConnection(_connectionString);
+        await connection.OpenAsync(cancelToken);
+
+        try
+        {
+            var markForDeletionCommand = new CommandDefinition(
+                commandText: $"SELECT * FROM {Functions.MarkRoomForDeletion}(@room_id, @mark_for_deletion_at)",
+                new { room_id = roomId, mark_for_deletion_at = markForDeletionAt },
+                commandType: CommandType.Text,
+                cancellationToken: cancelToken);
+
+            await connection.ExecuteAsync(markForDeletionCommand);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            return RoomErrors.UnableToMarkRoomForDeletion(e, roomId, markForDeletionAt);
+        }
+    }
+    
     public async Task<ErrorOr<bool>> DeleteRoom(int roomId, CancellationToken cancelToken)
     {
         await using var connection = new NpgsqlConnection(_connectionString);

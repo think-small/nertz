@@ -4,6 +4,24 @@ namespace Nertz.Infrastructure;
 
 public class RoomErrors
 {
+    public static Error UnableToMarkRoomForDeletion(Exception e, int roomId, DateTimeOffset markForDeletionAt)
+    {
+        var metadata = new Dictionary<string, object>() { { "Exception", e }  };
+        return Error.Unexpected(
+            code: "RoomErrors.UnableToMarkRoomForDeletion",
+            description: $"Unable to mark room with id: {roomId} for deletion at {markForDeletionAt}.",
+            metadata: metadata);   
+    }
+    
+    public static Error UnableToAssignHost(Exception e, int roomId, int hostId)
+    {
+        var metadata = new Dictionary<string, object>() { { "Exception", e }  };
+        return Error.Unexpected(
+            code: "RoomErrors.UnableToAssignHost",
+            description: $"Unable to assign host with id: {hostId} to room with id: {roomId}.",
+            metadata: metadata);   
+    }
+    
     public static Error UnableToRetrievePlayers(Exception e)
     {
         var metadata = new Dictionary<string, object>() { { "Exception", e }  };
@@ -11,6 +29,15 @@ public class RoomErrors
             code: "RoomErrors.UnableToRetrievePlayers",
             description: "Unable to retrieve players for the room.",
             metadata: metadata);
+    }
+
+    public static Error UnableToRetrieveRoom(Exception e, int roomId)
+    {
+        var metadata = new Dictionary<string, object>() { { "Exception", e }  };
+        return Error.Unexpected(
+            code: "RoomErrors.UnableToRetrieveRoom",
+            description: $"Unable to retrieve room with id: {roomId}."
+        );
     }
     
     public static Error UnableToCreateRoom(Exception e)

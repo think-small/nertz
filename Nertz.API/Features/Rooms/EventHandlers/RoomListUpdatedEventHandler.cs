@@ -5,18 +5,18 @@ using Nertz.Infrastructure.Contracts;
 
 namespace Nertz.API.Features.Rooms;
 
-public class RoomCreatedEventHandler : IEventHandler<RoomCreatedEvent>
+public class RoomListUpdatedEventHandler : IEventHandler<RoomListUpdatedEvent>
 {
     private readonly IRoomRepository _repository;
     private readonly IHubContext<RoomHub> _hubContext;
 
-    public RoomCreatedEventHandler(IRoomRepository repository, IHubContext<RoomHub> hubContext)
+    public RoomListUpdatedEventHandler(IRoomRepository repository, IHubContext<RoomHub> hubContext)
     {
         _repository = repository;
         _hubContext = hubContext;
     }
     
-    public async Task HandleAsync(RoomCreatedEvent eventModel, CancellationToken cancelToken)
+    public async Task HandleAsync(RoomListUpdatedEvent eventModel, CancellationToken cancelToken)
     {
         var roomData = await _repository.GetRooms(true, cancelToken);
 

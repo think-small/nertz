@@ -23,7 +23,7 @@ public class JoinRoomHandler : ICommandHandler<JoinRoomCommand, ErrorOr<JoinRoom
             throw new NotImplementedException();
         }
 
-        var joinedRoomEvent = new JoinedRoomEvent { RoomId = command.RoomId };
+        var joinedRoomEvent = new RoomPlayersChangedEvent { RoomId = command.RoomId };
         await joinedRoomEvent.PublishAsync(Mode.WaitForNone, CancellationToken.None);
         
         return new JoinRoomResponse();
